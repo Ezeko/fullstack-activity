@@ -44,8 +44,21 @@ app.post('/api/recipes',(req,res,next)=>{
             error: error
         })
     })
+    next();
 });
 
+//get route
+app.get('/api/recipes/:id', (req, res, next)=>{
+    Recipe.findOne({_id: req.params.id}).then((recipe)=>{
+        res.status(200).json(recipe);
+    })
+    next();
+});
+
+//Update route
+app.put('/api/recipes/:id', (req, res, next)=>{
+
+})
 //get route
 app.use('/api/recipes',(req,res, next)=>{
     
