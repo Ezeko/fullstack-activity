@@ -22,8 +22,13 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.json()); //call body-parser
 
+//post route
 
+app.post('/api/recipes',(req,res,next)=>{
+    recipe = new Recipe()
+})
 
+//get route
 app.use('/api/recipes',(req,res, next)=>{
     res.end(console.log('connected to server'))
 })
