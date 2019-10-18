@@ -82,6 +82,21 @@ app.put('/api/recipes/:id', (req, res, next)=>{
        next();
 
 })
+
+//delete route
+app.delete('/api/recipes/:id', (req, res, next)=>{
+    Recipe.deleteOne({_id: req.params.id}).then(()=>{
+        res.status(200).json({
+            message: "Recipe deleted successfully"
+        })
+    }).catch((error)=>{
+        res.status(400).json({
+            error: error
+        })
+    })
+
+    next();
+});
 //get route
 app.use('/api/recipes',(req,res, next)=>{
     
