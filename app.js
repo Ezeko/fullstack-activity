@@ -97,8 +97,15 @@ app.delete('/api/recipes/:id', (req, res, next)=>{
 
     next();
 });
-//get route
+//get all route
 app.use('/api/recipes',(req,res, next)=>{
+    Recipe.find().then((recipes)=>{
+        res.status(200).json(recipes);
+    }).catch((error)=>{
+        res.status(400).json({
+            error: error
+        })
+    })
     
 })
 
