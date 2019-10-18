@@ -1,6 +1,7 @@
 const express = require('express'); //import express
 const bodyParser = require('body-parser'); // import body-parser
 const mongoose = require('mongoose');
+const Recipe = require('./models/recipe');
 const app = express();
 
 //connect to Atlas
@@ -25,12 +26,29 @@ app.use(bodyParser.json()); //call body-parser
 //post route
 
 app.post('/api/recipes',(req,res,next)=>{
-    recipe = new Recipe()
-})
+    recipe = new Recipe({
+            title: req.body.title,
+            ingredients: req.body.ingredients,
+            instructions: req.body.instructions,
+            difficulty: req.body.difficulty,
+            time: req.body.time
+           
+    })
+
+    recipe.save().then(()=>{
+        res.status(201).json({
+            message: "Recipe created successfully"
+        })
+    }).catch((error)=>{
+        res.status(400).json({
+            error: error
+        })
+    })
+});
 
 //get route
 app.use('/api/recipes',(req,res, next)=>{
-    res.end(console.log('connected to server'))
+    
 })
 
 
